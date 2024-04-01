@@ -1,0 +1,66 @@
+REQUERIMIENTOS
+
+"Quiero construir una herramienta que me permita registrar de manera acumulativa las distintas tareas para la realización de un proyecto de desarrollo de software/web. El sistema debe permitir organizar las actividades en función de diversos criterios (por ejemplo: backlog, toDo, onGoing, done) de manera visual y simple de gestionar (por ejemplo con el uso de Drag&&drop). Además quisiera que se pueda exportar en un documento de texto manteniendo el orden y la legibilidad. El dispositivo principal será laptop/pc aunque debiera poder accederse desde el celular así sea con funcionalidad reducida. Las vistas principales de la aplicación serían dos: una que permita visualizar el DASHBOARD GLOBAL en dónde se pueda manipular las tareas en función de su estado y la otra que permita registrar, acceder y manipular cada TAREA INDIVIDUALMENTE"
+
+
+COMPONENTES Y FUNCIONALIDADES
+
+0- LAYOUT
+	- TÍTULO: MLBOARD
+	- FOOTER: #FreePlayerCodify
+
+1- VISTA LANDING
+	- BOTÓN: PROYECTO NUEVO (->mPN)
+	- BOTÓN: ABRIR PROYECTO (->mAP)
+
+1.a- MODAL PROYECTO NUEVO
+	CARD:
+		- INPUT: título (ref1)
+		- INPUT: descripción sintética del proyecto (ref2)
+		- INPUT: designación de usuarios
+		- BOTÓN: crear proyecto (vD->)
+		- BOTÓN: cerrar vista (vL->)
+
+1.b- MODAL ABRIR/GUARDAR PROYECTO
+	CARD:
+		- TABLA: nombre del archivo/ última actualización / boton: abrir/guardar (->vD)/ boton: eliminar
+		- BOTÓN: cerrar vista (->vL)
+
+2- VISTA "DASHBOARD"
+	- 5 columnas (project tree, backlog, to do, ongoing, done)
+	- componentes:
+		- TÍTULO: nombre del proyecto (ref1) (pestaña: MLBoard + título)
+		- TÍTULO:HOVER: descripción (ref2)
+		- CARD
+			+ TÍTULO (se edita en modal card)
+			+ KEYS WORD: permite una rápida noción de las tareas agrupadas en esa card (se edita en modal card)
+			+ TEXTO: muestra el USUARIO a cargo de la card (se edita en modal card)
+			+ TEXTO: muestra la ETAPA/SPRINT a la que pertenece la card (se edita en modal card)*
+			+ BOTONERA: 1- MENÚ-CAMBIAR estado de la card (alternativa a DRAG&DROP); 2- BOTÓN- EDITAR (->mC) ELIMINAR (atajo) + MODAL(¡alert!);  
+		- BOTÓN: AÑADIR tareas (->mC)
+		- MENÚ (desplegable/hamburguesa): 
+			+ EXPORTAR kanban; OPCIONES: 1- GUARDAR EN ORDENADOR, 2- GOOGLE DRIVE, 3- ENVIAR POR MAIL
+			+ BOTÓN: Nuevo proyecto (->vL)
+
+* ETAPA/SPRINT: permite agrupar las tareas en etapas para mayor organización
+
+2.1- MODAL "CARD"
+	- INPUT: título
+	- INPUT: Keys word
+	- INPUT: sprint
+	- SELECT: usuario (la card debe almacenar los usuarios que tienen tareas asignadas y ofrecerlas como opción)
+	- TEXTAREA: task
+	- TEXTAREA: observaciones
+	- BOTÓN: añadir tarea/guardar cambios
+	- BOTÓN: cerrar vista (vD->) 
+
+
+
+¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡NOTAS!!!!!!!!!!!!!!!
+
+
+PARA IMPORTAR ROBOTO FONT:
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
