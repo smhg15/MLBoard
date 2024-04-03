@@ -2,6 +2,7 @@ import {React, useState} from 'react';
 import { Box, Button, Modal, FormControl, TextField, InputLabel, Stack, Tooltip, Chip, List} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import style from '../SXStyleMUIComponents';
+import { Link } from 'react-router-dom';
 
 function ModalNewProject() {
   const [open, setOpen] = useState(false);
@@ -11,20 +12,13 @@ function ModalNewProject() {
     description:'',
     users:[]
   })
-///////////////////////////////////////////////////
-
-
-
-
-/////////////////////////////////////////////////////////////////////
 
   // Simple handle events
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleFormData = (e) => setFormData({...formData, [e.target.name]:e.target.value})
   const handleProjectUser = (e) => setProjectUser(e.target.value)
-  const handleCreateProject = ()=> console.log(formData);
- //Handle event with chips
+ // Handle event with chips
   function handleFormDataUsers() {
     if (projectUser != '') {
     setFormData(formData => ({
@@ -128,14 +122,15 @@ function ModalNewProject() {
                   ADD
                 </Button>
                 </div>
+                <Link to='/dashboard' state={formData}>
                 <Button
                   variant='contained' 
                   color='secondary'
                   size='small'         
-                  onClick={handleCreateProject}         
                 >
                   CREATE PROJECT
                 </Button>
+                </Link>
               </Stack>
             </FormControl>
             
