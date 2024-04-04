@@ -9,7 +9,7 @@ function Dashboard() {
     return (
       <>
       <div>
-        <h2>PROYECTO</h2>
+        <h2>{state.title}</h2>
         <div>MENÚ HAMBURGUESA + NEW TASK</div>
         <div>PROJECT TREE</div>
       </div>

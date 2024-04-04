@@ -1,24 +1,33 @@
 import {React, useState} from 'react';
 import { Box, Button, Modal, FormControl, TextField, InputLabel, Stack, Tooltip, Chip, List} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import style from '../SXStyleMUIComponents';
 import { Link } from 'react-router-dom';
+import style from '../SXStyleMUIComponents';
 
 function ModalNewProject() {
   const [open, setOpen] = useState(false);
+  const [titleIsDefine, setTitleIsDefine] = useState(false);
   const [projectUser, setProjectUser] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     description:'',
     users:[]
   })
-
-  // Simple handle events
+// Handle Description and other simple events
+  const handleDescriptionFormData = (e) => setFormData({...formData, [e.target.name]:e.target.value})
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleFormData = (e) => setFormData({...formData, [e.target.name]:e.target.value})
   const handleProjectUser = (e) => setProjectUser(e.target.value)
- // Handle event with chips
+// Handle Title event
+  function handleTitleFormData(e) {
+    if (e.target.value == ''){
+    setTitleIsDefine(false)
+  }else{
+    setTitleIsDefine(true)
+  }
+    return setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+// Handle Users events
   function handleFormDataUsers() {
     if (projectUser != '') {
     setFormData(formData => ({
@@ -70,21 +79,24 @@ function ModalNewProject() {
             </Button>
             <FormControl>
               <Stack spacing={2}>
+                <Tooltip title="This Field is required" placement='top-start' arrow >
                 <InputLabel 
                   id='title'
                 ></InputLabel>
                 <TextField 
-                  label='title'
+                  label='title *'
                   name='title'
-                  onChange={(e) => {handleFormData(e)}}
+                  type='text'
+                  onChange={(e) => {handleTitleFormData(e)}}
                 ></TextField>
+                </Tooltip>
                 <InputLabel 
                   id='description'
                 ></InputLabel>
                 <TextField 
                   label='description'
                   name='description'
-                  onChange={(e) => {handleFormData(e)}}
+                  onChange={(e) => {handleDescriptionFormData(e)}}
                 ></TextField>
                 <List>
                 {formData.users.map((user, index) => {
@@ -122,15 +134,16 @@ function ModalNewProject() {
                   ADD
                 </Button>
                 </div>
-                <Link to='/dashboard' state={formData}>
                 <Button
-                  variant='contained' 
+                  variant='contained'
                   color='secondary'
-                  size='small'         
+                  size='small'
+                  component={Link}
+                  to={titleIsDefine?'/dashboard':''}
+                  state={formData}
                 >
                   CREATE PROJECT
                 </Button>
-                </Link>
               </Stack>
             </FormControl>
             
