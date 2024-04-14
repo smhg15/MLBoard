@@ -1,7 +1,24 @@
 
-// This file includes all the additional styles ('sx' styles) added on MUI components.
-
+// This file includes all the additional styles ('sx' styles) added on MUI components
+// Classes are sorted alphabetically
 const style = {
+    dashboardBox: {
+      /*CONTAINER*/
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      backgroundColor:'#ce93d871',
+      position: 'absolute',
+      /*CONTENT*/
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    border:{
+      border:'solid 2px #000000',
+      borderRadius: '10px',
+      padding: '1%',
+    },
     box: {
       position: 'absolute',
       top: '50%',
@@ -9,18 +26,24 @@ const style = {
       transform: 'translate(-50%, -50%)',
       width: 400,
       bgcolor: 'background.paper',
-      border: '2px solid #000000',
       boxShadow: 24,
       p: 4,
-      borderRadius: '10px',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
+    },
+    buttonGroupBox: {
+      display: 'flex',      
+      justifyContent:'space-between',
+      width: '95%',
     },
     buttomX: {
       position: 'absolute',
       top: '2%',
       right: '0%',
+    },
+    divider: {
+      margin: '2%',
     }
   };
 

@@ -69,7 +69,7 @@ function ModalNewProject() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style.box}>
+        <Box sx={[style.box, style.border]}>
             <Button 
               color='secondary' 
               sx={style.buttomX}
@@ -79,7 +79,7 @@ function ModalNewProject() {
             </Button>
             <FormControl>
               <Stack spacing={2}>
-                <Tooltip title="This Field is required" placement='top-start' arrow >
+                <Tooltip title="This field is required" placement='top-start' arrow >
                 <InputLabel 
                   id='title'
                 ></InputLabel>

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Box, Button, Modal, FormControl, FormLabel, TextField, Select, MenuItem } from '@mui/material';
-
+import { Box, Button, IconButton, Modal, FormControl, FormLabel, TextField, Select, MenuItem } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -13,14 +13,21 @@ const style = {
   p: 4,
 };
 
-function ModalTask() {
+function ModalTask({users}) {
+  console.log(users)
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <IconButton 
+        title='New Task' 
+        color='primary' 
+        onClick={handleOpen}
+      >
+        <AddIcon fontSize='large'/>
+      </IconButton>
       <Modal
         open={open}
         onClose={handleClose}
@@ -43,9 +50,9 @@ function ModalTask() {
                 // value={users}
                 // onChange={handleChange}
                 >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                  {users.map((user, index) => <MenuItem value={index}>
+                                                {user}
+                                              </MenuItem>)}
                 </Select>
                 <FormLabel>Task</FormLabel>
                 <TextField></TextField>

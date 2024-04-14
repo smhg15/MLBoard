@@ -54,8 +54,19 @@ COMPONENTES Y FUNCIONALIDADES
 	- BOTÓN: añadir tarea/guardar cambios
 	- BOTÓN: cerrar vista (vD->) 
 
+FEATURES 1.1.0*
 
-
+CHIP --> BUTTON CHIP (->MODAL USERS)
+MODAL USERS- Información de cada usuario participante
+	+ task (asignadas, distribuidas por estados)
+	+ rol
+	+ fecha de ingreso y egreso en el proyecto
+	
+* estructura de versionado (síntesis): 
+con '1.2.3':
+1 - Versión de la App
+2 - Nuevas funcionalidades
+3 - Fixs o cambios menores
 ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡NOTAS!!!!!!!!!!!!!!!
 
 
