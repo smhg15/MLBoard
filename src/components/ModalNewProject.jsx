@@ -1,5 +1,5 @@
 import {React, useState} from 'react';
-import { Box, Button, Modal, FormControl, TextField, InputLabel, Stack, Tooltip, Chip, List} from '@mui/material';
+import { Box, Button, Modal, FormControl, TextField, InputLabel, Stack, Tooltip, Chip, List, Typography} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 import style from '../SXStyleMUIComponents';
@@ -70,82 +70,79 @@ function ModalNewProject() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={[style.box, style.border]}>
-            <Button 
-              color='secondary' 
-              sx={style.buttomX}
-              onClick={handleClose}
-            >
-              <CloseIcon/>
-            </Button>
-            <FormControl>
-              <Stack spacing={2}>
-                <Tooltip title="This field is required" placement='top-start' arrow >
-                <InputLabel 
-                  id='title'
-                ></InputLabel>
-                <TextField 
-                  label='title *'
-                  name='title'
-                  type='text'
-                  onChange={(e) => {handleTitleFormData(e)}}
-                ></TextField>
-                </Tooltip>
-                <InputLabel 
-                  id='description'
-                ></InputLabel>
-                <TextField 
-                  label='description'
-                  name='description'
-                  onChange={(e) => {handleDescriptionFormData(e)}}
-                ></TextField>
-                <List>
-                {formData.users.map((user, index) => {
-                  return (
-                      <Chip
-                        key={index}
-                        label={user}
-                        onDelete={()=>handleDeleteFormDataUsers(index)}
-                        color='secondary'
-                        size='small'
-                      />
-                  );
-                })}
-                </List>
-                <div>
-                <Tooltip title="Enter username and press 'Add' button" placement='top' arrow>
-                <InputLabel 
-                  id='users'
-                ></InputLabel>
-                <TextField 
-                  label='users'
-                  name='users'
-                  size='small'   
-                  value={projectUser}
-                  onChange={(e) => {handleProjectUser(e)}}
-                  onKeyDown={(e)=>{handleFormDataUsersEnter(e)}}
-                ></TextField>
-                </Tooltip>
-                <Button
-                  variant= 'text'
-                  color='secondary'
-                  size='large'
-                  onClick={() => {handleFormDataUsers()}}
-                >
-                  ADD
-                </Button>
-                </div>
-                <Button
-                  variant='contained'
-                  color='secondary'
-                  size='small'
-                  component={Link}
-                  to={titleIsDefine?'/dashboard':''}
-                  state={formData}
-                >
-                  CREATE PROJECT
-                </Button>
-              </Stack>
-            </FormControl>
+        <Typography>New Project</Typography>
+          <Button 
+            color='secondary' 
+            sx={style.buttomX}
+            onClick={handleClose}
+            
+          >
+            <CloseIcon/>
+          </Button>
+          <FormControl>
+            <Stack spacing={2}>
+              <InputLabel id='title'/>
+              <Tooltip title="This field is required" placement='top-start' arrow>
+              <TextField 
+                label='title *'
+                name='title'
+                onChange={(e) => {handleTitleFormData(e)}}
+              />
+              </Tooltip>
+              <InputLabel 
+                id='description'
+              />
+              <TextField 
+                label='description'
+                name='description'
+                onChange={(e) => {handleDescriptionFormData(e)}}
+              />
+              <List>
+              {formData.users.map((user, index) => {
+                return (
+                    <Chip
+                      key={index}
+                      label={user}
+                      onDelete={()=>handleDeleteFormDataUsers(index)}
+                      color='secondary'
+                      size='small'
+                    />
+                );
+              })}
+              </List>
+              <div>
+              <Tooltip title="Enter username and press 'Add' button" placement='top' arrow>
+              <InputLabel id='users'/>
+              <TextField 
+                label='users'
+                name='users'
+                size='small'   
+                value={projectUser}
+                onChange={(e) => {handleProjectUser(e)}}
+                onKeyDown={(e)=>{handleFormDataUsersEnter(e)}}
+              />
+              </Tooltip>
+              <Button
+                variant= 'text'
+                color='secondary'
+                size='large'
+                onClick={() => {handleFormDataUsers()}}
+              >
+                ADD
+              </Button>
+              </div>
+              <Button
+                variant='contained'
+                color='secondary'
+                size='small'
+                component={Link}
+                to={titleIsDefine?'/dashboard':''}
+                state={formData}
+              >
+                CREATE PROJECT
+              </Button>
+            </Stack>
+          </FormControl>
             
         </Box>
       </Modal>

@@ -1,24 +1,17 @@
-import * as React from 'react';
-import { Box, Button, IconButton, Modal, FormControl, FormLabel, TextField, Select, MenuItem } from '@mui/material';
+import {React, useState} from 'react';
+import { Box, Button, IconButton, Modal, FormControl, InputLabel, TextField, Select, MenuItem, Stack, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import CloseIcon from '@mui/icons-material/Close';
+import style from '../SXStyleMUIComponents';
+
 
 function ModalTask({users}) {
   console.log(users)
-  const [open, setOpen] = React.useState(false);
+  const [selectValue, setSelectValue] = useState('');
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const handleChange = (e) => {setSelectValue(e.target.value)};
   return (
     <div>
       <IconButton 
@@ -30,35 +23,52 @@ function ModalTask({users}) {
       </IconButton>
       <Modal
         open={open}
-        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-            <Button>X</Button>
+        <Box sx={[style.box, style.border]}>
+          <Typography>New Task</Typography>
+          <Button 
+              color='secondary' 
+              sx={style.buttomX}
+              onClick={handleClose}
+            >
+              <CloseIcon/>
+            </Button>
             <FormControl>
-                <FormLabel>Title</FormLabel>
-                <TextField></TextField>
-                <FormLabel>Key Words</FormLabel>
-                <TextField></TextField>
-                <FormLabel>Sprint</FormLabel>
-                <TextField></TextField>
-                <FormLabel id="users">Users</FormLabel>
+             <Stack spacing={2}>
+                <InputLabel id='Title'/>
+                <TextField label='Title *'/>
+                <InputLabel id='Key Words'/>
+                <TextField label='Key Words'/>
+                <InputLabel id='Sprint'/>
+                <TextField label='Sprint'/>
+                <FormControl>
+                <InputLabel id="users">User</InputLabel>
                 <Select
+                  label='Users'
                   labelId="users"
                   id="users"
-                // value={users}
-                // onChange={handleChange}
+                  value={selectValue}
+                  onChange={handleChange}
                 >
                   {users.map((user, index) => <MenuItem value={index}>
                                                 {user}
                                               </MenuItem>)}
                 </Select>
-                <FormLabel>Task</FormLabel>
-                <TextField></TextField>
-                <FormLabel>Notes</FormLabel>
-                <TextField></TextField>
-                <Button>CREATE PROJECT</Button>
+                </FormControl>
+                <InputLabel id='Task'/>
+                <TextField label='Task'/>
+                <InputLabel id='Notes'/>
+                <TextField label='Notes'/>
+                <Button
+                  variant='contained'
+                  color='secondary'
+                  size='small'
+                >
+                  CREATE TASK
+                </Button>
+              </Stack>
             </FormControl>
         </Box>
 </Modal>      

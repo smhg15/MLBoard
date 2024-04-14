@@ -60,7 +60,7 @@ function Dashboard() {
       </Box>
       <Divider flexItem variant='middle' sx={style.divider}/>
       <div className='dashboardColums'>
-      <Typography variant='body2' align='left'>PROJECT TREE:</Typography>
+      <Typography variant='body2' align='left'>Project tree:</Typography>
       
       </div>
       </div>
