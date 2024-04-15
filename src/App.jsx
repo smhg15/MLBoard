@@ -1,8 +1,3 @@
-import CardTaskResume from "./components/CardTaskResume"
-import ModalNewProject from "./components/ModalNewProject"
-import ModalOpenAndSaveProject from "./components/ModalOpenAndSaveProject"
-import ModalTask from "./components/ModalTask"
-import Dashboard from "./views/Dashboard"
 import Landing from "./views/Landing"
 import './App.css'
 import '@fontsource/roboto/300.css';

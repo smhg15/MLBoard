@@ -7,7 +7,7 @@ import style from '../SXStyleMUIComponents';
 function ModalNewProject() {
   const [open, setOpen] = useState(false);
   const [titleIsDefine, setTitleIsDefine] = useState(false);
-  const [projectUser, setProjectUser] = useState('');
+  const [projectUsers, setProjectUsers] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     description:'',
@@ -17,33 +17,35 @@ function ModalNewProject() {
   const handleDescriptionFormData = (e) => setFormData({...formData, [e.target.name]:e.target.value})
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleProjectUser = (e) => setProjectUser(e.target.value)
-// Handle Title event
+  // Handle Title event
   function handleTitleFormData(e) {
     if (e.target.value == ''){
-    setTitleIsDefine(false)
-  }else{
-    setTitleIsDefine(true)
-  }
+      setTitleIsDefine(false)
+    }else{
+      setTitleIsDefine(true)
+    }
     return setFormData({ ...formData, [e.target.name]: e.target.value });
   }
-// Handle Users events
+  // Handle Users events
+  const handleProjectUsers = (e) => setProjectUsers(e.target.value)
+
   function handleFormDataUsers() {
-    if (projectUser != '') {
+    if (projectUsers != '') {
     setFormData(formData => ({
       ...formData,
-      users: [...formData.users, projectUser]
+      users: [...formData.users, projectUsers]
     }));
-    setProjectUser('')
+    setProjectUsers('')
   }}
+
   function handleFormDataUsersEnter(e) {
     if (e.key === 'Enter'){
-      if (projectUser != '') {
+      if (projectUsers != '') {
       setFormData(formData => ({
         ...formData,
-        users: [...formData.users, projectUser]
+        users: [...formData.users, projectUsers]
       }));
-      setProjectUser('')
+      setProjectUsers('')
     }}}
 
   const handleDeleteFormDataUsers= (indexToRemove) => {
@@ -117,8 +119,8 @@ function ModalNewProject() {
                 label='users'
                 name='users'
                 size='small'   
-                value={projectUser}
-                onChange={(e) => {handleProjectUser(e)}}
+                value={projectUsers}
+                onChange={(e) => {handleProjectUsers(e)}}
                 onKeyDown={(e)=>{handleFormDataUsersEnter(e)}}
               />
               </Tooltip>
