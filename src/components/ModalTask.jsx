@@ -3,27 +3,31 @@ import { Box, Button, Chip, FormControl, IconButton, InputLabel, MenuItem, Modal
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import style from '../SXStyleMUIComponents';
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { updateTask } from '../store/stateSlice';
 
 
-
-function ModalTask({users}) {
-  console.log(users)
-  const [selectValue, setSelectValue] = useState('');
+function ModalTask() {
+  const projectUsers = useSelector((state)=>state.projectTree.users)
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
-
   const [keyWords, setKeyWords] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     keyWords:[],
-    user:'',
+    sprint:' ',
+    users:'',
     task:'',
     notes:'',
+    state:'backlog'
   })
 
   // Handle simple events
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleChange = (e) => {setSelectValue(e.target.value)};
+  const handleFormData = (e) => setFormData({...formData, [e.target.name]:e.target.value})
+  const handleCreateTask= (formData)=>dispatch(updateTask(formData));
 
   // Handle Key Words events
   const handleProjectKeyWords = (e) => setKeyWords(e.target.value)
@@ -79,7 +83,11 @@ function ModalTask({users}) {
             <FormControl>
              <Stack spacing={2}>
                 <InputLabel id='Title'/>
-                <TextField label='Title *'/>
+                <TextField 
+                  label='Title *'
+                  name='title'
+                  onChange={(e) => {handleFormData(e)}}
+                />
 {/* CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS */}
                 <List>
                   {formData.keyWords.map((kWord, index) => {
@@ -95,8 +103,12 @@ function ModalTask({users}) {
                   })}
                 </List>
                 <div>
-                  <Tooltip title="Enter key word and press 'Add' button" placement='top' arrow>
                   <InputLabel id='kWords'/>
+                  <Tooltip 
+                    title="Enter key word and press 'Add' button" 
+                    placement='top' 
+                    arrow
+                  >
                   <TextField 
                     label='Key Words'
                     name='kWords'
@@ -117,18 +129,25 @@ function ModalTask({users}) {
                 </div>
 {/* CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS */}
                 <InputLabel id='Sprint'/>
-                <TextField label='Sprint'/>
+                <TextField 
+                  label='Sprint'
+                  name='sprint'
+                  onChange={(e) => {handleFormData(e)}}
+                />
                 <FormControl>
                 <InputLabel id="users">User</InputLabel>
                 <Select
                   label='Users'
                   labelId="users"
                   id="users"
-                  value={selectValue}
-                  onChange={handleChange}
+                  name='users'
+                  value={formData.users}
+                  onChange={(e) => {handleFormData(e)}}
                 >
-                  {users.map((user, index) => <MenuItem value={index}>
-                                                {user}
+                  {projectUsers.map((user, index) => <MenuItem 
+                                                key={index} 
+                                                value={user}>
+                                                  {user}
                                               </MenuItem>)}
                 </Select>
                 </FormControl>
@@ -137,18 +156,22 @@ function ModalTask({users}) {
                   label='Task' 
                   multiline
                   maxRows={3}
+                  name='task'
+                  onChange={(e) => {handleFormData(e)}}
                 />
                 <InputLabel id='Notes'/>
                 <TextField 
                   label='Notes' 
                   multiline
-                  maxRows={4}                  
+                  maxRows={4}  
+                  name='notes'
+                  onChange={(e) => {handleFormData(e)}}                
                   />
                 <Button
                   variant='contained'
                   color='secondary'
                   size='small'
-                  onClick={console.log(formData)}
+                  onClick={()=>handleCreateTask(formData)}
                 >
                   CREATE TASK
                 </Button>

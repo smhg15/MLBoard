@@ -3,8 +3,12 @@ import { Box, Button, Modal, FormControl, TextField, InputLabel, Stack, Tooltip,
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 import style from '../SXStyleMUIComponents';
+import { useDispatch } from 'react-redux'
+import { updateProject } from '../store/stateSlice';
+
 
 function ModalNewProject() {
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
   const [titleIsDefine, setTitleIsDefine] = useState(false);
   const [projectUsers, setProjectUsers] = useState('');
@@ -139,7 +143,8 @@ function ModalNewProject() {
                 size='small'
                 component={Link}
                 to={titleIsDefine?'/dashboard':''}
-                state={formData}
+                // state={formData} //para pasar el estado con react-router-dom (F4: la información persiste, con redux no.)
+                onClick={() => dispatch(updateProject(formData))}
               >
                 CREATE PROJECT
               </Button>

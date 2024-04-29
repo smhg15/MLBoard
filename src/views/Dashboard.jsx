@@ -1,6 +1,6 @@
-import { Box, Typography, Divider, Accordion, AccordionSummary, AccordionDetails, Chip, IconButton } from '@mui/material';
+import { Box, Typography, Divider, Accordion, AccordionSummary, AccordionDetails, Chip, IconButton, ListItem, List, ListItemText, Badge } from '@mui/material';
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';//para pasar el estado con react-router-dom (F4: la información persiste, con redux no.)
 import { Link } from 'react-router-dom';
 import style from '../SXStyleMUIComponents';
 import '../App.css';
@@ -10,10 +10,13 @@ import SaveIcon from '@mui/icons-material/Save';
 import AddToDriveIcon from '@mui/icons-material/AddToDrive';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import ModalTask from '../components/ModalTask';
+import { useSelector } from 'react-redux'
 
 function Dashboard() {
-  
-  let { state } = useLocation();
+  const headerProject = useSelector((state)=>state.projectTree)
+  const tasks = useSelector((state)=>state.projectTree.task)
+  console.log(tasks)
+  // let { state } = useLocation();//para pasar el estado con react-router-dom
     return (
       <Box sx={[style.dashboardBox, style.border]}>
       <div className='border dashboardColums'>
@@ -21,15 +24,15 @@ function Dashboard() {
         <AccordionSummary
           expandIcon={<ExpandMoreIcon/>}
         >
-          <Typography variant='h4'>{state.title}</Typography>
+          <Typography variant='h4'>{headerProject.title}</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          {state.description}
+        <AccordionDetails >
+          {headerProject.description}
           <Divider variant='middle' sx={style.divider}/>
-          <Typography variant="body2">
+          <Typography variant="body2" sx={style.divider}>
             Project Users:
           </Typography>
-          {state.users.map((user, index) => <Chip  key={index}
+          {headerProject.users.map((user, index) => <Chip  key={index}
                                               label={user}
                                               color='secondary'
                                               size='small'>
@@ -56,7 +59,7 @@ function Dashboard() {
           orientation="vertical" 
           sx={style.divider}
         />
-        <ModalTask users={state.users}/>
+        <ModalTask/>
       </Box>
       <Divider flexItem variant='middle' sx={style.divider}/>
       <div className='dashboardColums'>
@@ -67,6 +70,21 @@ function Dashboard() {
       <div className='border dashboardColums'>
         <Typography variant='h4' align='center'>BACKLOG</Typography>
         <Divider flexItem variant='middle' sx={style.divider}/>
+        <List>
+          {tasks.map((task, index) => {
+            return (
+              <>
+                <ListItem
+                  key={index}
+                >
+                <ListItemText primary={task.title} />
+                <Badge badgeContent={task.sprint} color="primary" title={`Sprint: ${task.sprint}`}/>
+                </ListItem>
+                <Divider flexItem variant='middle'/>
+              </>
+            );
+          })}
+          </List>
       </div>
       <div className='border dashboardColums'>
         <Typography variant='h4' align='center'>TO DO</Typography>
