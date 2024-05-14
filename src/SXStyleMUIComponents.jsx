@@ -44,7 +44,7 @@ const style = {
     },
     divider: {
       margin: '2%',
-    }
+    },
   };
 
   export default style

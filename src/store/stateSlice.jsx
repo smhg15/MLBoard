@@ -6,15 +6,15 @@ const projectTreeSlice = createSlice({
         title: '',
         description:'',
         users:[],
-        task:[
+        tasks:[
             // {
             // title: '',
             // keyWords:[],
             // sprint:' ',
-            // users:'',
+            // user: '',
             // task:'',
             // notes:'',
-            // }
+            // state: 'backlog',}
         ]
         
     },
@@ -25,12 +25,12 @@ const projectTreeSlice = createSlice({
         state.description= description
         state.users= users
       },
-        updateTask: (state, action) => {
-        state.task= [...state.task, action.payload]
+        addTask: (state, action) => {
+        state.tasks= [...state.tasks, action.payload]
         }
     }
   })
 
-  export const { updateProject, updateTask } = projectTreeSlice.actions
+  export const { updateProject, addTask } = projectTreeSlice.actions
 
   export default projectTreeSlice.reducer

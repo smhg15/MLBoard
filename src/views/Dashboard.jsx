@@ -1,21 +1,20 @@
-import { Box, Typography, Divider, Accordion, AccordionSummary, AccordionDetails, Chip, IconButton, ListItem, List, ListItemText, Badge } from '@mui/material';
+import { Box, Typography, Divider, Accordion, AccordionSummary, AccordionDetails, Chip, IconButton, List, Tooltip } from '@mui/material';
 import React from 'react';
 // import { useLocation } from 'react-router-dom';//para pasar el estado con react-router-dom (F4: la información persiste, con redux no.)
 import { Link } from 'react-router-dom';
 import style from '../SXStyleMUIComponents';
 import '../App.css';
+import { useSelector } from 'react-redux'
+import ModalTask from '../components/ModalTask';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EmailIcon from '@mui/icons-material/Email';
 import SaveIcon from '@mui/icons-material/Save';
 import AddToDriveIcon from '@mui/icons-material/AddToDrive';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import ModalTask from '../components/ModalTask';
-import { useSelector } from 'react-redux'
 
 function Dashboard() {
   const headerProject = useSelector((state)=>state.projectTree)
-  const tasks = useSelector((state)=>state.projectTree.task)
-  console.log(tasks)
+  const tasks = useSelector((state)=>state.projectTree.tasks)
   // let { state } = useLocation();//para pasar el estado con react-router-dom
     return (
       <Box sx={[style.dashboardBox, style.border]}>
@@ -41,18 +40,41 @@ function Dashboard() {
       </Accordion>
       <Box
       sx={[style.buttonGroupBox, style.divider]}
-    >
+      >
+        <Tooltip 
+          title="New Project" 
+          placement='bottom' 
+          arrow
+        >
         <IconButton 
           component={Link}
           to={'/'}
-          title='New Project'
           color='secondary'
         >                    
           <CreateNewFolderIcon/>
         </IconButton>
-        <IconButton title='Save' color='secondary'><SaveIcon/></IconButton>
-        <IconButton title='Add to Google Drive' color='secondary'><AddToDriveIcon/></IconButton>
-        <IconButton title='Send by e-mail' color='secondary'><EmailIcon/></IconButton>
+        </Tooltip>
+        <Tooltip 
+          title="Save" 
+          placement='bottom' 
+          arrow
+        >
+        <IconButton color='secondary'><SaveIcon/></IconButton>
+        </Tooltip>
+        <Tooltip 
+          title="Add to Google Drive" 
+          placement='bottom' 
+          arrow
+        >
+        <IconButton color='secondary'><AddToDriveIcon/></IconButton>
+        </Tooltip>
+        <Tooltip 
+          title="Send by e-mail" 
+          placement='bottom' 
+          arrow
+        >
+        <IconButton color='secondary'><EmailIcon/></IconButton>
+        </Tooltip>
         <Divider 
           flexItem 
           variant='middle' 
@@ -64,7 +86,6 @@ function Dashboard() {
       <Divider flexItem variant='middle' sx={style.divider}/>
       <div className='dashboardColums'>
       <Typography variant='body2' align='left'>Project tree:</Typography>
-      
       </div>
       </div>
       <div className='border dashboardColums'>
@@ -73,15 +94,35 @@ function Dashboard() {
         <List>
           {tasks.map((task, index) => {
             return (
-              <>
-                <ListItem
-                  key={index}
-                >
-                <ListItemText primary={task.title} />
-                <Badge badgeContent={task.sprint} color="primary" title={`Sprint: ${task.sprint}`}/>
-                </ListItem>
-                <Divider flexItem variant='middle'/>
-              </>
+                <Accordion variant='elevation' key={index}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon/>}
+                  >
+                    {task.sprint !=''?<Chip label={task.sprint} color='primary' size='small'/>:''}
+                    <Divider 
+                      flexItem 
+                      variant='middle' 
+                      orientation="vertical" 
+                      sx={style.divider}
+                    />
+                    <Tooltip 
+                      title={task.keyWords.join(', ')}
+                      placement='top' 
+                      arrow
+                    >
+                    <Typography variant='body1'>{task.title}</Typography>
+                    </Tooltip>
+                  </AccordionSummary>
+                  <AccordionDetails >
+                    {task.task}
+                    <Divider variant='middle' sx={style.divider}/>
+                    <Typography variant="body2" sx={style.divider}>
+                    Task assigned to:
+                    </Typography>
+                    {task.user !=''?<Chip label={task.user} color='secondary' size='small'/>:'- not assigned -'}
+                    <ModalTask indexTask={index}/>
+                  </AccordionDetails>
+                </Accordion>
             );
           })}
           </List>

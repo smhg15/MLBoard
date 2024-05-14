@@ -27,6 +27,10 @@
   width: 100%;
   margin: 0.5%;
 }
+.endAlignButton {
+  display: flex;
+  justify-content: end;
+}
 .footer {
   position: absolute;
   bottom: 2%;

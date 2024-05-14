@@ -1,33 +1,64 @@
 import {React, useState} from 'react';
 import { Box, Button, Chip, FormControl, IconButton, InputLabel, MenuItem, Modal, List, Select, Stack, Tooltip, TextField, Typography} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
 import style from '../SXStyleMUIComponents';
+import '../App.css';
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { updateTask } from '../store/stateSlice';
+import { addTask } from '../store/stateSlice';
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
-
-function ModalTask() {
+function ModalTask({indexTask}) {
   const projectUsers = useSelector((state)=>state.projectTree.users)
+  const taskData = useSelector((state)=>state.projectTree.tasks[indexTask]||'')
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
+  const [titleIsDefine, setTitleIsDefine] = useState(false);
   const [keyWords, setKeyWords] = useState('');
   const [formData, setFormData] = useState({
-    title: '',
-    keyWords:[],
-    sprint:' ',
-    users:'',
-    task:'',
-    notes:'',
-    state:'backlog'
+    title:taskData.title|| '',
+    keyWords:taskData.keyWords||[],
+    sprint:taskData.sprint||'',
+    user:taskData.user||'',
+    task:taskData.task||'',
+    notes:taskData.notes||'',
+    state:taskData.state||'backlog'
   })
 
   // Handle simple events
-  const handleOpen = () => setOpen(true);
+  function handleOpen() {
+    setOpen(true)
+    formData.title !=''?setTitleIsDefine(true):'';
+  }
   const handleClose = () => setOpen(false);
   const handleFormData = (e) => setFormData({...formData, [e.target.name]:e.target.value})
-  const handleCreateTask= (formData)=>dispatch(updateTask(formData));
+  
+  function handleTitleFormData(e) {
+    if (e.target.value == ''){
+      setTitleIsDefine(false)
+    }else{
+      setTitleIsDefine(true)
+    }
+    return setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+  
+  function handleCreateTask(formData) {
+    if (titleIsDefine == true) {
+    dispatch(addTask(formData))
+    handleClose();
+    setFormData({
+      title: '',
+      keyWords:[],
+      sprint:' ',
+      user:'',
+      task:'',
+      notes:'',
+      state:'backlog'
+    });
+    setTitleIsDefine(false)
+    }
+  }
 
   // Handle Key Words events
   const handleProjectKeyWords = (e) => setKeyWords(e.target.value)
@@ -58,21 +89,31 @@ function ModalTask() {
     }));
   }
   return (
-    <div>
+    <div className='endAlignButton'>
+      <Tooltip 
+          title={taskData==''?'New Task':'View Details'}
+          placement='bottom'  
+          arrow
+        >
       <IconButton 
-        title='New Task' 
         color='primary' 
-        onClick={handleOpen}
+        onClick={handleOpen}        
       >
+        {
+        taskData==''?
         <AddIcon fontSize='large'/>
+        :
+        <VisibilityIcon fontSize='small'/>
+        }  
       </IconButton>
+      </Tooltip>
       <Modal
         open={open}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={[style.box, style.border]}>
-          <Typography>New Task</Typography>
+          <Typography>{taskData==''?'New Task':'Task Details'}</Typography>
           <Button 
               color='secondary' 
               sx={style.buttomX}
@@ -86,11 +127,13 @@ function ModalTask() {
                 <TextField 
                   label='Title *'
                   name='title'
-                  onChange={(e) => {handleFormData(e)}}
+                  value={formData.title}
+                  onChange={(e) => {handleTitleFormData(e)}}
                 />
 {/* CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS */}
                 <List>
-                  {formData.keyWords.map((kWord, index) => {
+                  {
+                  formData.keyWords.map((kWord, index) => {
                     return (
                         <Chip
                           key={index}
@@ -100,7 +143,8 @@ function ModalTask() {
                           size='small'
                         />
                     );
-                  })}
+                  })
+                  }
                 </List>
                 <div>
                   <InputLabel id='kWords'/>
@@ -132,16 +176,17 @@ function ModalTask() {
                 <TextField 
                   label='Sprint'
                   name='sprint'
+                  defaultValue={formData.sprint}
                   onChange={(e) => {handleFormData(e)}}
                 />
                 <FormControl>
-                <InputLabel id="users">User</InputLabel>
+                <InputLabel id="user">User</InputLabel>
                 <Select
-                  label='Users'
-                  labelId="users"
-                  id="users"
-                  name='users'
-                  value={formData.users}
+                  label='User'
+                  labelId="user"
+                  id="user"
+                  name='user'
+                  value={formData.user}
                   onChange={(e) => {handleFormData(e)}}
                 >
                   {projectUsers.map((user, index) => <MenuItem 
@@ -157,6 +202,7 @@ function ModalTask() {
                   multiline
                   maxRows={3}
                   name='task'
+                  defaultValue={formData.task}
                   onChange={(e) => {handleFormData(e)}}
                 />
                 <InputLabel id='Notes'/>
@@ -165,6 +211,7 @@ function ModalTask() {
                   multiline
                   maxRows={4}  
                   name='notes'
+                  defaultValue={formData.notes}
                   onChange={(e) => {handleFormData(e)}}                
                   />
                 <Button
@@ -173,7 +220,7 @@ function ModalTask() {
                   size='small'
                   onClick={()=>handleCreateTask(formData)}
                 >
-                  CREATE TASK
+                  {taskData==''?'CREATE TASK':'CLOSE / SAVE CHANGES'}
                 </Button>
               </Stack>
             </FormControl>
