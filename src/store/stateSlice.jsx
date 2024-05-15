@@ -10,7 +10,7 @@ const projectTreeSlice = createSlice({
             // {
             // title: '',
             // keyWords:[],
-            // sprint:' ',
+            // sprint:'',
             // user: '',
             // task:'',
             // notes:'',
@@ -19,18 +19,22 @@ const projectTreeSlice = createSlice({
         
     },
     reducers: {
+        addTask: (state, action) => {
+        state.tasks= [...state.tasks, action.payload]
+        },
         updateProject: (state, action) => {
         const {title, description, users} = action.payload
         state.title= title
         state.description= description
         state.users= users
       },
-        addTask: (state, action) => {
-        state.tasks= [...state.tasks, action.payload]
-        }
+      updateTask: (state, action) => {
+        const {indexTask, formData} = action.payload
+        state.tasks[indexTask]= formData
+        },
     }
   })
 
-  export const { updateProject, addTask } = projectTreeSlice.actions
+  export const { addTask, updateProject, updateTask } = projectTreeSlice.actions
 
   export default projectTreeSlice.reducer

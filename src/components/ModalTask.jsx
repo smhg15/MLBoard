@@ -4,7 +4,7 @@ import style from '../SXStyleMUIComponents';
 import '../App.css';
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { addTask } from '../store/stateSlice';
+import { addTask, updateTask } from '../store/stateSlice';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -29,7 +29,7 @@ function ModalTask({indexTask}) {
   // Handle simple events
   function handleOpen() {
     setOpen(true)
-    formData.title !=''?setTitleIsDefine(true):'';
+    formData.title !=''?setTitleIsDefine(true):setTitleIsDefine(false);
   }
   const handleClose = () => setOpen(false);
   const handleFormData = (e) => setFormData({...formData, [e.target.name]:e.target.value})
@@ -50,7 +50,7 @@ function ModalTask({indexTask}) {
     setFormData({
       title: '',
       keyWords:[],
-      sprint:' ',
+      sprint:'',
       user:'',
       task:'',
       notes:'',
@@ -59,6 +59,13 @@ function ModalTask({indexTask}) {
     setTitleIsDefine(false)
     }
   }
+
+  function handleEditTask(indexTask, formData){
+      let payload = {indexTask, formData}
+      dispatch(updateTask(payload))
+      handleClose();
+      setTitleIsDefine(false)
+    }
 
   // Handle Key Words events
   const handleProjectKeyWords = (e) => setKeyWords(e.target.value)
@@ -218,7 +225,7 @@ function ModalTask({indexTask}) {
                   variant='contained'
                   color='secondary'
                   size='small'
-                  onClick={()=>handleCreateTask(formData)}
+                  onClick={taskData==''?()=>handleCreateTask(formData):()=>handleEditTask(indexTask, formData)}
                 >
                   {taskData==''?'CREATE TASK':'CLOSE / SAVE CHANGES'}
                 </Button>

@@ -1,8 +1,6 @@
 TASK
-	stateSlice:
-		crear f(x):updateTask
-	ModalTask:
-		Crear f(x): "handleEditTask"
+	Dashboard:
+		Task State: cambiar estado de las tareas y su correspondiente renderizacion en cada columna
 	App:
 		Toolkits: reemplazar title info con toolkits para lograr coherencia (revisar si está hecho en toda la app)
 		"?"icon: añadir información e instrucciones como un modal informativo en las distintas  vistas y modales
