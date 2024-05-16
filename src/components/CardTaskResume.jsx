@@ -1,50 +1,48 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import style from '../SXStyleMUIComponents';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import { FormControl, IconButton, InputLabel, MenuItem, Select } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-function CardTaskResume() {
+import { Accordion, AccordionDetails, AccordionSummary, Divider, Tooltip } from '@mui/material';
+import ModalTask from './ModalTask';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import StatusSelect from './StatusSelect'
+
+
+function CardTaskResume({task, index}) {
   return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          title
-        </Typography>
-        <Typography variant="h5" component="div">
-         sprint
-        </Typography>
-        <Stack direction="row" spacing={1}>
-        <Chip label="Chip Filled" />
-        </Stack>
-        <Typography variant="body2">
-         users
-        </Typography>
-      </CardContent>
-      <CardActions>
-      <FormControl sx={{ minWidth: 120 }}>
-      <InputLabel id="users">users</InputLabel>
-        <Select
-          labelId="users"
-          label="users"
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        <IconButton edge="end" aria-label="fileOpen">
-          <EditIcon/>
-        </IconButton>
-        <IconButton edge="end" aria-label="delete">
-          <DeleteIcon/>
-        </IconButton>
-        </FormControl>
-      </CardActions>
-    </Card>
+    
+    <Accordion variant='elevation'>
+    <AccordionSummary
+      expandIcon={<ExpandMoreIcon/>}
+    >
+      {task.sprint !=''?<Chip label={task.sprint} color='primary' size='small'/>:''}
+      <Divider
+        flexItem 
+        variant='middle' 
+        orientation="vertical" 
+        sx={style.divider}
+      />
+      <Tooltip 
+        title={task.keyWords.join(', ')}
+        placement='top' 
+        arrow
+      >
+      <Typography variant='body1'>{task.title}</Typography>
+      </Tooltip>
+    </AccordionSummary>
+    <AccordionDetails >
+      {task.task}
+      <Divider variant='middle' sx={style.divider}/>
+      <Typography variant="body2" sx={style.divider}>
+      Task assigned to:
+      </Typography>
+      {task.user !=''?<Chip label={task.user} color='secondary' size='small'/>:'- not assigned -'}
+      <div className='endAlignButton'>
+      <StatusSelect indexTask={index}/>
+      <ModalTask indexTask={index}/>
+      </div>
+    </AccordionDetails>
+  </Accordion>
   );
 }
 export default CardTaskResume

@@ -11,6 +11,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import SaveIcon from '@mui/icons-material/Save';
 import AddToDriveIcon from '@mui/icons-material/AddToDrive';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import CardTaskResume from '../components/CardTaskResume';
 
 function Dashboard() {
   const headerProject = useSelector((state)=>state.projectTree)
@@ -93,51 +94,40 @@ function Dashboard() {
         <Divider flexItem variant='middle' sx={style.divider}/>
         <List>
           {tasks.map((task, index) => {
-            return (
-                <Accordion variant='elevation' key={index}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                  >
-                    {task.sprint !=''?<Chip label={task.sprint} color='primary' size='small'/>:''}
-                    <Divider 
-                      flexItem 
-                      variant='middle' 
-                      orientation="vertical" 
-                      sx={style.divider}
-                    />
-                    <Tooltip 
-                      title={task.keyWords.join(', ')}
-                      placement='top' 
-                      arrow
-                    >
-                    <Typography variant='body1'>{task.title}</Typography>
-                    </Tooltip>
-                  </AccordionSummary>
-                  <AccordionDetails >
-                    {task.task}
-                    <Divider variant='middle' sx={style.divider}/>
-                    <Typography variant="body2" sx={style.divider}>
-                    Task assigned to:
-                    </Typography>
-                    {task.user !=''?<Chip label={task.user} color='secondary' size='small'/>:'- not assigned -'}
-                    <ModalTask indexTask={index}/>
-                  </AccordionDetails>
-                </Accordion>
-            );
+            if (task.status =='backlog')
+            return (<CardTaskResume key={index} task={task} index={index}/>);
           })}
           </List>
       </div>
       <div className='border dashboardColums'>
         <Typography variant='h4' align='center'>TO DO</Typography>
         <Divider flexItem variant='middle' sx={style.divider}/>
+        <List>
+          {tasks.map((task, index) => {
+            if (task.status =='todo')
+            return (<CardTaskResume key={index} task={task} index={index}/>);
+          })}
+          </List>
       </div>
       <div className='border dashboardColums'>
         <Typography variant='h4' align='center'>ON GOING</Typography>
         <Divider flexItem variant='middle' sx={style.divider}/>
+        <List>
+          {tasks.map((task, index) => {
+            if (task.status =='ongoing')
+            return (<CardTaskResume key={index} task={task} index={index}/>);
+          })}
+          </List>
       </div>
       <div className='border dashboardColums'>
         <Typography variant='h4' align='center'>DONE</Typography>
         <Divider flexItem variant='middle' sx={style.divider}/>
+        <List>
+          {tasks.map((task, index) => {
+            if (task.status =='done')
+            return (<CardTaskResume key={index} task={task} index={index}/>);
+          })}
+          </List>
       </div>
       </Box>
     )

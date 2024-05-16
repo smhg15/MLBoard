@@ -1,7 +1,10 @@
 TASK
 	Dashboard:
-		Task State: cambiar estado de las tareas y su correspondiente renderizacion en cada columna
+		corregir overflow de las columnas. No se ajustan al contenedor.
+	CardTaskResume:
+		añadir opción de eliminar task (con alert de "estás seguro?")
 	App:
+		Snackbars para los campos obligatorios sin completar!!!
 		Toolkits: reemplazar title info con toolkits para lograr coherencia (revisar si está hecho en toda la app)
 		"?"icon: añadir información e instrucciones como un modal informativo en las distintas  vistas y modales
 REQUERIMIENTOS
@@ -50,7 +53,7 @@ COMPONENTES Y FUNCIONALIDADES
 
 * ETAPA/SPRINT: permite agrupar las tareas en etapas para mayor organización
 
-2.1- MODAL "CARD" (WORKING)
+2.1- MODAL "CARD" (LISTO)
 	- INPUT: título
 	- INPUT: Keys word
 	- INPUT: sprint

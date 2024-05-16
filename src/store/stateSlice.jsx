@@ -14,27 +14,32 @@ const projectTreeSlice = createSlice({
             // user: '',
             // task:'',
             // notes:'',
-            // state: 'backlog',}
+            // status: 'backlog',}
         ]
         
     },
     reducers: {
         addTask: (state, action) => {
-        state.tasks= [...state.tasks, action.payload]
+            state.tasks= [...state.tasks, action.payload]
         },
         updateProject: (state, action) => {
-        const {title, description, users} = action.payload
-        state.title= title
-        state.description= description
-        state.users= users
-      },
-      updateTask: (state, action) => {
-        const {indexTask, formData} = action.payload
-        state.tasks[indexTask]= formData
+            const {title, description, users} = action.payload
+            state.title= title
+            state.description= description
+            state.users= users
+        },
+        updateTask: (state, action) => {
+            const {indexTask, formData} = action.payload
+            state.tasks[indexTask]= formData
+        },
+        updateTaskStatus: (state, action) => {
+            const {taskStatus, indexTask} = action.payload
+            state.tasks[indexTask].status= taskStatus
+            console.log(state.tasks[indexTask].status)
         },
     }
   })
 
-  export const { addTask, updateProject, updateTask } = projectTreeSlice.actions
+  export const { addTask, updateProject, updateTask, updateTaskStatus } = projectTreeSlice.actions
 
   export default projectTreeSlice.reducer

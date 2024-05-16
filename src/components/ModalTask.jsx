@@ -23,7 +23,7 @@ function ModalTask({indexTask}) {
     user:taskData.user||'',
     task:taskData.task||'',
     notes:taskData.notes||'',
-    state:taskData.state||'backlog'
+    status:taskData.status||'backlog'
   })
 
   // Handle simple events
@@ -54,7 +54,7 @@ function ModalTask({indexTask}) {
       user:'',
       task:'',
       notes:'',
-      state:'backlog'
+      status:'backlog'
     });
     setTitleIsDefine(false)
     }
@@ -96,12 +96,12 @@ function ModalTask({indexTask}) {
     }));
   }
   return (
-    <div className='endAlignButton'>
+    <div>
       <Tooltip 
           title={taskData==''?'New Task':'View Details'}
           placement='bottom'  
           arrow
-        >
+      >
       <IconButton 
         color='primary' 
         onClick={handleOpen}        
