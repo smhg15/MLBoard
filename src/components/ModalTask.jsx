@@ -2,8 +2,7 @@ import {React, useState} from 'react';
 import { Box, Button, Chip, FormControl, IconButton, InputLabel, MenuItem, Modal, List, Select, Stack, Tooltip, TextField, Typography} from '@mui/material';
 import style from '../SXStyleMUIComponents';
 import '../App.css';
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { addTask, updateTask } from '../store/stateSlice';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
@@ -97,23 +96,24 @@ function ModalTask({indexTask}) {
   }
   return (
     <div>
-      <Tooltip 
-          title={taskData==''?'New Task':'View Details'}
-          placement='bottom'  
-          arrow
-      >
       <IconButton 
-        color='primary' 
-        onClick={handleOpen}        
+        color={taskData==''?'primary':'secondary'}
+        onClick={handleOpen}
+        size='small'        
       >
+        <Tooltip 
+            title={taskData==''?'New Task':'View Details'}
+            placement='bottom'  
+            arrow
+        >
         {
         taskData==''?
         <AddIcon fontSize='large'/>
         :
-        <VisibilityIcon fontSize='small'/>
+        <VisibilityIcon/>
         }  
-      </IconButton>
       </Tooltip>
+      </IconButton>
       <Modal
         open={open}
         aria-labelledby="modal-modal-title"
@@ -127,7 +127,7 @@ function ModalTask({indexTask}) {
               onClick={handleClose}
             >
               <CloseIcon/>
-            </Button>
+          </Button>
             <FormControl>
              <Stack spacing={2}>
                 <InputLabel id='Title'/>

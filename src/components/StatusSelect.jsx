@@ -7,7 +7,7 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import style from '../SXStyleMUIComponents';
-import { Divider, Tooltip, Typography } from '@mui/material';
+import { Divider, IconButton, Tooltip, Typography } from '@mui/material';
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { updateTaskStatus } from '../store/stateSlice';
@@ -45,12 +45,14 @@ function StatusSelect({indexTask}) {
 
   return (
     <div>
-      <Button
+      <IconButton
         id="demo-positioned-button"
         aria-controls={open ? 'demo-positioned-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
+        color={taskData!='done'?'primary':'success'}
         onClick={handleClick}
+        size='small'
       >
         <Tooltip 
             title="Change Status" 
@@ -59,7 +61,7 @@ function StatusSelect({indexTask}) {
         >
             {icon}
         </Tooltip>
-      </Button>
+      </IconButton>
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
@@ -106,7 +108,7 @@ function StatusSelect({indexTask}) {
             <Typography>On Going</Typography>
         </MenuItem>
         <MenuItem onClick={()=>handleChangeStatus('done', indexTask)}>
-            <AssignmentTurnedInIcon color='primary' fontSize='small'/>
+            <AssignmentTurnedInIcon color='success' fontSize='small'/>
             <Divider 
                 flexItem 
                 variant='middle' 

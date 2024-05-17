@@ -22,6 +22,10 @@ const projectTreeSlice = createSlice({
         addTask: (state, action) => {
             state.tasks= [...state.tasks, action.payload]
         },
+        deleteTask: (state, action) => {
+            const {indexTask} = action.payload
+            state.tasks.splice(indexTask, 1)
+        },
         updateProject: (state, action) => {
             const {title, description, users} = action.payload
             state.title= title
@@ -40,6 +44,6 @@ const projectTreeSlice = createSlice({
     }
   })
 
-  export const { addTask, updateProject, updateTask, updateTaskStatus } = projectTreeSlice.actions
+  export const { addTask, deleteTask, updateProject, updateTask, updateTaskStatus } = projectTreeSlice.actions
 
   export default projectTreeSlice.reducer

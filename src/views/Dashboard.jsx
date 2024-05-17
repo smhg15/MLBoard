@@ -92,7 +92,7 @@ function Dashboard() {
       <div className='border dashboardColums'>
         <Typography variant='h4' align='center'>BACKLOG</Typography>
         <Divider flexItem variant='middle' sx={style.divider}/>
-        <List>
+        <List sx={style.overflow}>
           {tasks.map((task, index) => {
             if (task.status =='backlog')
             return (<CardTaskResume key={index} task={task} index={index}/>);
@@ -102,7 +102,7 @@ function Dashboard() {
       <div className='border dashboardColums'>
         <Typography variant='h4' align='center'>TO DO</Typography>
         <Divider flexItem variant='middle' sx={style.divider}/>
-        <List>
+        <List sx={style.overflow}>
           {tasks.map((task, index) => {
             if (task.status =='todo')
             return (<CardTaskResume key={index} task={task} index={index}/>);
@@ -112,7 +112,7 @@ function Dashboard() {
       <div className='border dashboardColums'>
         <Typography variant='h4' align='center'>ON GOING</Typography>
         <Divider flexItem variant='middle' sx={style.divider}/>
-        <List>
+        <List sx={style.overflow}>
           {tasks.map((task, index) => {
             if (task.status =='ongoing')
             return (<CardTaskResume key={index} task={task} index={index}/>);
@@ -122,7 +122,7 @@ function Dashboard() {
       <div className='border dashboardColums'>
         <Typography variant='h4' align='center'>DONE</Typography>
         <Divider flexItem variant='middle' sx={style.divider}/>
-        <List>
+        <List sx={style.overflow}>
           {tasks.map((task, index) => {
             if (task.status =='done')
             return (<CardTaskResume key={index} task={task} index={index}/>);

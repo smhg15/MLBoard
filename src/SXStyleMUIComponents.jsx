@@ -45,6 +45,16 @@ const style = {
     divider: {
       margin: '2%',
     },
+    overflow: {
+      overflow: 'auto',
+      height: '90%',
+      '&::-webkit-scrollbar': {
+        width: '0.4em'
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#ce93d871',
+      }
+    }
   };
 
   export default style

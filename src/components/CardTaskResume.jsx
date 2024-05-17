@@ -6,7 +6,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Divider, Tooltip } from 
 import ModalTask from './ModalTask';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import StatusSelect from './StatusSelect'
-
+import DeleteTask from './DeleteTask'
 
 function CardTaskResume({task, index}) {
   return (
@@ -38,6 +38,7 @@ function CardTaskResume({task, index}) {
       </Typography>
       {task.user !=''?<Chip label={task.user} color='secondary' size='small'/>:'- not assigned -'}
       <div className='endAlignButton'>
+      <DeleteTask indexTask={index}/>
       <StatusSelect indexTask={index}/>
       <ModalTask indexTask={index}/>
       </div>
