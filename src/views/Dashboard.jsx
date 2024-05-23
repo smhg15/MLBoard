@@ -12,6 +12,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import AddToDriveIcon from '@mui/icons-material/AddToDrive';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import CardTaskResume from '../components/CardTaskResume';
+import ProjectTree from '../components/ProjectTree';
 
 function Dashboard() {
   const headerProject = useSelector((state)=>state.projectTree)
@@ -85,8 +86,9 @@ function Dashboard() {
         <ModalTask/>
       </Box>
       <Divider flexItem variant='middle' sx={style.divider}/>
-      <div className='dashboardColums'>
       <Typography variant='body2' align='left'>Project tree:</Typography>
+      <div className='dashboardColums overflow'>
+      <ProjectTree data={tasks}/>
       </div>
       </div>
       <div className='border dashboardColums'>

@@ -36,3 +36,14 @@
   bottom: 2%;
   right: 2%;
 }
+.overflow{
+  height: 76%;
+  width: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+.overflow::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background-color: #ce93d871;
+}

@@ -1,7 +1,8 @@
 TASK
-	CardTaskResume:
-		añadir  Dialog de "estás seguro?" al botón delete
+	Project Tree:
+		if all task of a sprint are "done" Sprint Background turn green ('success')
 	App:
+		control de formularios y campos (RegEx)
 		¿añadir "key" a las tasks para usar dispatch al store en lugar de props multinivel?
 		Snackbars para los campos obligatorios sin completar!!!
 		Toolkits: reemplazar title info con toolkits para lograr coherencia (revisar si está hecho en toda la app)

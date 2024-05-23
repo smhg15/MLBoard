@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SourceIcon from '@mui/icons-material/Source';
@@ -11,24 +10,11 @@ import { Divider, IconButton, Tooltip, Typography } from '@mui/material';
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { updateTaskStatus } from '../store/stateSlice';
+import IconStatus from '../commons/iconStatus';
 
 function StatusSelect({indexTask}) {
   const taskData = useSelector((state)=>state.projectTree.tasks[indexTask].status)
   const dispatch = useDispatch()
-  let icon
-  switch (taskData) {
-      case 'todo':
-          icon= <AssignmentIndIcon/>
-          break
-      case 'ongoing':
-          icon= <EngineeringIcon/>
-          break
-      case 'done':
-          icon= <AssignmentTurnedInIcon/>
-          break
-      default:
-          icon= <SourceIcon/>
-  }
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -50,7 +36,6 @@ function StatusSelect({indexTask}) {
         aria-controls={open ? 'demo-positioned-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        color={taskData!='done'?'primary':'success'}
         onClick={handleClick}
         size='small'
       >
@@ -59,7 +44,7 @@ function StatusSelect({indexTask}) {
             placement='bottom' 
             arrow
         >
-            {icon}
+            <IconStatus status={taskData}/>
         </Tooltip>
       </IconButton>
       <Menu

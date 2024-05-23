@@ -1,5 +1,8 @@
 
 // This file includes all the additional styles ('sx' styles) added on MUI components
+
+import { HowToVoteRounded } from "@mui/icons-material";
+
 // Classes are sorted alphabetically
 const style = {
     dashboardBox: {
@@ -54,7 +57,17 @@ const style = {
       '&::-webkit-scrollbar-thumb': {
         backgroundColor: '#ce93d871',
       }
-    }
+    },
+    treeSprint:{
+      padding:'2%',
+      width:'100%',
+      backgroundColor:'#ce93d871'
+    },
+    treeTask:{
+      padding:'0 10% 2% 5%',
+      width:'100%',
+      backgroundColor:'#fafafa',      
+    },
   };
 
   export default style
