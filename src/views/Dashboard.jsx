@@ -7,12 +7,12 @@ import '../App.css';
 import { useSelector } from 'react-redux'
 import ModalTask from '../components/ModalTask';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import EmailIcon from '@mui/icons-material/Email';
-import SaveIcon from '@mui/icons-material/Save';
-import AddToDriveIcon from '@mui/icons-material/AddToDrive';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import CardTaskResume from '../components/CardTaskResume';
 import ProjectTree from '../components/ProjectTree';
+import SaveProject from '../components/SaveProject';
+import SendByEmailProject from '../components/SendByEmailProject';
+import AddToGoogleDriveProject from '../components/AddToGoogleDriveProject';
 
 function Dashboard() {
   const headerProject = useSelector((state)=>state.projectTree)
@@ -56,27 +56,9 @@ function Dashboard() {
           <CreateNewFolderIcon/>
         </IconButton>
         </Tooltip>
-        <Tooltip 
-          title="Save" 
-          placement='bottom' 
-          arrow
-        >
-        <IconButton color='secondary'><SaveIcon/></IconButton>
-        </Tooltip>
-        <Tooltip 
-          title="Add to Google Drive" 
-          placement='bottom' 
-          arrow
-        >
-        <IconButton color='secondary'><AddToDriveIcon/></IconButton>
-        </Tooltip>
-        <Tooltip 
-          title="Send by e-mail" 
-          placement='bottom' 
-          arrow
-        >
-        <IconButton color='secondary'><EmailIcon/></IconButton>
-        </Tooltip>
+        <SaveProject/>
+        <AddToGoogleDriveProject/>
+        <SendByEmailProject/>
         <Divider 
           flexItem 
           variant='middle' 

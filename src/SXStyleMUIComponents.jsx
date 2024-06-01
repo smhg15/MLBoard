@@ -52,10 +52,12 @@ const style = {
       overflow: 'auto',
       height: '90%',
       '&::-webkit-scrollbar': {
-        width: '0.4em'
+        width: '7px',
+        backgroundColor: '#fafafa',
       },
       '&::-webkit-scrollbar-thumb': {
         backgroundColor: '#ce93d871',
+        border: 'solid 1px #fafafa'
       }
     },
     treeSprint:{

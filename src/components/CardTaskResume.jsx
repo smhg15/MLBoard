@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import style from '../SXStyleMUIComponents';
 import Typography from '@mui/material/Typography';
 import Chip from '@mui/material/Chip';

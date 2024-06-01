@@ -1,12 +1,25 @@
-TASK
-	Project Tree:
-		if all task of a sprint are "done" Sprint Background turn green ('success')
+Beta TASK 
+	Modal Open Project:
+		Version local Use (cargar un archivo txt con los datos del proyecto guardado)
+	APP:
+		"?"icon: añadir información e instrucciones como un modal informativo en las distintas  vistas y modales
+		Toolkits: reemplazar title info con toolkits para lograr coherencia (revisar si está hecho en toda la app)
+
+1.0.0 TASK 
 	App:
+		if all task of a sprint are "done" Sprint Background turn green ('success')
+		alphabetical ordenation of all columns 
 		control de formularios y campos (RegEx)
 		¿añadir "key" a las tasks para usar dispatch al store en lugar de props multinivel?
 		Snackbars para los campos obligatorios sin completar!!!
-		Toolkits: reemplazar title info con toolkits para lograr coherencia (revisar si está hecho en toda la app)
-		"?"icon: añadir información e instrucciones como un modal informativo en las distintas  vistas y modales
+
+1.1.0 TASK	
+	DRAG AND DROP FUNCTION
+
+2.1.0 TASK
+	BACKEND
+		NODEMAILER: add to google drive y envío por mail
+		USUARIOS (AUTENTIFICACIONES Y AUTORIZACIONES)
 REQUERIMIENTOS
 
 "Quiero construir una herramienta que me permita registrar de manera acumulativa las distintas tareas para la realización de un proyecto de desarrollo de software/web. El sistema debe permitir organizar las actividades en función de diversos criterios (por ejemplo: backlog, toDo, onGoing, done) de manera visual y simple de gestionar (por ejemplo con el uso de Drag&&drop). Además quisiera que se pueda exportar en un documento de texto manteniendo el orden y la legibilidad. El dispositivo principal será laptop/pc aunque debiera poder accederse desde el celular así sea con funcionalidad reducida. Las vistas principales de la aplicación serían dos: una que permita visualizar el DASHBOARD GLOBAL en dónde se pueda manipular las tareas en función de su estado y la otra que permita registrar, acceder y manipular cada TAREA INDIVIDUALMENTE"
@@ -63,7 +76,7 @@ COMPONENTES Y FUNCIONALIDADES
 	- BOTÓN: añadir tarea/guardar cambios
 	- BOTÓN: cerrar vista (vD->) 
 
-FEATURES 1.1.0*
+FEATURES 2.1.0*
 
 CHIP --> BUTTON CHIP (->MODAL USERS)
 MODAL USERS- Información de cada usuario participante

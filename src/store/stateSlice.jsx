@@ -26,6 +26,13 @@ const projectTreeSlice = createSlice({
             const {indexTask} = action.payload
             state.tasks.splice(indexTask, 1)
         },
+        openProject: (state, action) => {
+            const {title, description, users, tasks} = action.payload
+            state.title= title
+            state.description= description
+            state.users= users
+            state.tasks= tasks
+        },
         updateProject: (state, action) => {
             const {title, description, users} = action.payload
             state.title= title
@@ -39,11 +46,10 @@ const projectTreeSlice = createSlice({
         updateTaskStatus: (state, action) => {
             const {taskStatus, indexTask} = action.payload
             state.tasks[indexTask].status= taskStatus
-            console.log(state.tasks[indexTask].status)
         },
     }
   })
 
-  export const { addTask, deleteTask, updateProject, updateTask, updateTaskStatus } = projectTreeSlice.actions
+  export const { addTask, deleteTask, openProject, updateProject, updateTask, updateTaskStatus } = projectTreeSlice.actions
 
   export default projectTreeSlice.reducer

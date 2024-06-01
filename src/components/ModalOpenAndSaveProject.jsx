@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { cloneElement, useState } from 'react';
 import { Box, Button, Modal, Avatar, List, ListItem, ListItemAvatar, ListItemText, IconButton, Grid} from '@mui/material';
 import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -6,7 +6,7 @@ import { FileOpen, Save } from '@mui/icons-material';
 
 function generate(element) {
   return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
+    cloneElement(element, {
       key: value,
     }),
   );
@@ -25,7 +25,7 @@ const style = {
 };
 
 function ModalOpenAndSaveProject() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

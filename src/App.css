@@ -22,6 +22,19 @@
   border-radius: 10px;
   padding: 1%;
 }
+.button{
+  border-radius: 0.3em;
+  text-shadow: 0 1px 0 #5a5a5a71;
+  margin: 5px;
+  padding: 5px;
+  height: 2.4em;
+  font-family: 'roboto';
+  font-weight: 1000;
+  cursor: pointer;
+}
+.button:hover{
+  text-shadow: 1px 2px 1px #5a5a5a71;
+}
 .dashboardColums {
   background-color: #fff;
   width: 100%;
@@ -36,7 +49,10 @@
   bottom: 2%;
   right: 2%;
 }
-.overflow{
+.hidden {
+  display: none;
+}
+.overflow {
   height: 76%;
   width: 100%;
   overflow: auto;
@@ -44,6 +60,9 @@
 }
 .overflow::-webkit-scrollbar {
   width: 7px;
-  height: 7px;
+  background-color: #fafafa;
+}
+.overflow::-webkit-scrollbar-thumb {
   background-color: #ce93d871;
+  border: solid 1px #fafafa;
 }
