@@ -96,24 +96,24 @@ function ModalTask({indexTask}) {
   }
   return (
     <div>
+      <Tooltip 
+          title={taskData==''?'New Task':'View Details'}
+          placement='bottom'  
+          arrow
+      >
       <IconButton 
         color={taskData==''?'primary':'secondary'}
         onClick={handleOpen}
         size='small'        
       >
-        <Tooltip 
-            title={taskData==''?'New Task':'View Details'}
-            placement='bottom'  
-            arrow
-        >
         {
         taskData==''?
         <AddIcon fontSize='large'/>
         :
         <VisibilityIcon/>
         }  
-      </Tooltip>
       </IconButton>
+      </Tooltip>
       <Modal
         open={open}
         aria-labelledby="modal-modal-title"

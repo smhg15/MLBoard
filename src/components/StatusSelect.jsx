@@ -31,6 +31,11 @@ function StatusSelect({indexTask}) {
 
   return (
     <div>
+      <Tooltip 
+          title="Change Status" 
+          placement='bottom' 
+          arrow
+      >
       <IconButton
         id="demo-positioned-button"
         aria-controls={open ? 'demo-positioned-menu' : undefined}
@@ -39,14 +44,9 @@ function StatusSelect({indexTask}) {
         onClick={handleClick}
         size='small'
       >
-        <Tooltip 
-            title="Change Status" 
-            placement='bottom' 
-            arrow
-        >
             <IconStatus status={taskData}/>
-        </Tooltip>
       </IconButton>
+        </Tooltip>
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"

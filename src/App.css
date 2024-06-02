@@ -1,4 +1,4 @@
-/* This file includes all the styles of HTML elements */
+/* This file includes all the styles of HTML elements and React Components*/
 /* Classes are sorted alphabetically */
 
 .app {
@@ -38,7 +38,10 @@
 .dashboardColums {
   background-color: #fff;
   width: 100%;
+  height: auto;
   margin: 0.5%;
+  display: flex;
+  flex-direction: column;
 }
 .endAlignButton {
   display: flex;
@@ -53,7 +56,7 @@
   display: none;
 }
 .overflow {
-  height: 76%;
+  height: 100%;
   width: 100%;
   overflow: auto;
   overflow-x: hidden;

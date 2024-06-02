@@ -1,6 +1,4 @@
 Beta TASK 
-	Modal Open Project:
-		Version local Use (cargar un archivo txt con los datos del proyecto guardado)
 	APP:
 		"?"icon: añadir información e instrucciones como un modal informativo en las distintas  vistas y modales
 		Toolkits: reemplazar title info con toolkits para lograr coherencia (revisar si está hecho en toda la app)

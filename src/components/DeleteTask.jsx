@@ -28,19 +28,19 @@ function DeleteTask(indexTask){
     }
     return(
         <>
-        <IconButton
-        onClick={handleClickOpen}
-        color='error'
-        size='small'
-        >
         <Tooltip 
             title="Delete Task" 
             placement='bottom' 
             arrow
             >
+        <IconButton
+        onClick={handleClickOpen}
+        color='error'
+        size='small'
+        >
             <DeleteIcon/>
-        </Tooltip>
         </IconButton>
+        </Tooltip>
         <Dialog
             open={open}
             onClose={handleClose}
