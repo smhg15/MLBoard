@@ -60,10 +60,11 @@ function ModalTask({indexTask}) {
   }
 
   function handleEditTask(indexTask, formData){
-      let payload = {indexTask, formData}
-      dispatch(updateTask(payload))
-      handleClose();
-      setTitleIsDefine(false)
+      if (formData.title !='')
+        {let payload = {indexTask, formData}
+        dispatch(updateTask(payload))
+        handleClose();
+        setTitleIsDefine(false)}
     }
 
   // Handle Key Words events
@@ -131,12 +132,14 @@ function ModalTask({indexTask}) {
             <FormControl>
              <Stack spacing={2}>
                 <InputLabel id='Title'/>
+                <Tooltip title="This field is required" placement='top-start' arrow>
                 <TextField 
                   label='Title *'
                   name='title'
                   value={formData.title}
                   onChange={(e) => {handleTitleFormData(e)}}
                 />
+                </Tooltip>
 {/* CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS CHIPS */}
                 <List>
                   {
